@@ -64,8 +64,8 @@ $ git push --set-upstream fork your-branch-name
 ## How to use
 
 Open a Terminal window and navigate to syncoFoldersPython.py.
-Enter the following command for Windows  ++python syncFoldersPython.py and hit "enter" key.
-In Unix based systems the command is ++python3 syncFoldersPython.py and hit "enter" key.
+Enter the following command for Windows  $ python syncFoldersPython.py and hit "enter" key.
+In Unix based systems the command is $ python3 syncFoldersPython.py and hit "enter" key.
 Now terminal will show a prompt for your source directory, choose a target directory giving a correct absolute path to command and hit "enter" key.
 You'll prompted to type a path for replica directory, again choose an absolute path to this directory and hit "enter" key.
 The new prompt will ask for log file, choose am absolute path to this directory and hit "enter" key.
