@@ -39,5 +39,32 @@ def synchronize_directories(source_dir_path, replica_dir_path, log_dir_path):
 
     print(f"Synchronized {source_dir_path} and {replica_dir_path}. Backup logged to {log_file_path}")
 
+
+def compare_directories(source_dir_path, replica_dir_path):
+    for root, dirs, files in os.walk(source_dir_path):
+        for file in files:
+            source_file_path = os.path.join(root, file)
+            replica_file_path = os.path.join(replica_dir_path, os.path.relpath(source_file_path, source_dir_path))
+
+            source_file_hash = hashlib.md5()
+            with open(source_file_path, "rb") as source_file:
+                for chunk in iter(lambda: source_file.read(4096), b""):
+                    source_file_hash.update(chunk)
+            source_file_md5 = source_file_hash.hexdigest()
+
+            replica_file_hash = hashlib.md5()
+            with open(replica_file_path, "rb") as replica_file:
+                for chunk in iter(lambda: replica_file.read(4096), b""):
+                    replica_file_hash.update(chunk)
+            replica_file_md5 = replica_file_hash.hexdigest()
+
+            if source_file_md5 != replica_file_md5:
+                print(f"File {os.path.relpath(source_file_path, source_dir_path)} is corrupted")
+                return False
+    print("Copies made with success")
+    return True
+
+
 source_dir_path, replica_dir_path, log_dir_path, interval = get_user_input()
 synchronize_directories(source_dir_path, replica_dir_path, log_dir_path)
+compare_directories(source_dir_path, replica_dir_path)
