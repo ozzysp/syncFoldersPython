@@ -65,6 +65,13 @@ def compare_directories(source_dir_path, replica_dir_path):
     return True
 
 
+def run_backup_routine(source_dir_path, replica_dir_path, log_dir_path, interval):
+    while True:
+        synchronize_directories(source_dir_path, replica_dir_path, log_dir_path)
+        compare_directories(source_dir_path, replica_dir_path)
+        time.sleep(interval * 60)
+
 source_dir_path, replica_dir_path, log_dir_path, interval = get_user_input()
 synchronize_directories(source_dir_path, replica_dir_path, log_dir_path)
 compare_directories(source_dir_path, replica_dir_path)
+run_backup_routine(source_dir_path, replica_dir_path, log_dir_path, interval)
