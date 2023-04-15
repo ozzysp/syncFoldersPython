@@ -67,11 +67,11 @@ $ git push --set-upstream fork your-branch-name
 
 - Enter the following command for Windows  
 
-$ python syncFoldersPython.py and hit "enter" key.
+$ python main.py and hit "enter" key.
 
 - In Unix based systems the command is 
 
-$ python3 syncFoldersPython.py and hit "enter" key.
+$ python3 main.py and hit "enter" key.
 
 - Now terminal will show a prompt for your source directory, choose a target directory giving a correct absolute path to command and hit "enter" key.
 
