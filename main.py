@@ -6,6 +6,11 @@
 # *  License:  GNU                                                           *
 # ****************************************************************************
 
+import os
+import shutil
+import datetime
+import hashlib
+import time
 
 def get_user_input():
     source_dir_path = input("Enter the path to the source directory: ")
