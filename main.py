@@ -66,7 +66,7 @@ def compare_directories(source_dir_path, replica_dir_path):
             if source_file_md5 != replica_file_md5:
                 print(f"File {os.path.relpath(source_file_path, source_dir_path)} is corrupted")
                 return False
-    print("Copies made with success")
+    print("Copies made and verified with success")
     return True
 
 
