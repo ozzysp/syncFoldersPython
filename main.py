@@ -15,4 +15,16 @@ def get_user_input():
     return source_dir_path, replica_dir_path, log_dir_path, interval
 
 
+def check_and_clear_replica(replica_dir_path):
+    if os.path.exists(replica_dir_path) and os.path.isdir(replica_dir_path):
+        if os.listdir(replica_dir_path):
+            shutil.rmtree(replica_dir_path)
+            print(f"Deleted all content from {replica_dir_path}")
+        else:
+            print(f"{replica_dir_path} is already empty")
+    else:
+        print(f"{replica_dir_path} does not exist or is not a directory")
+
+
 source_dir_path, replica_dir_path, log_dir_path, interval = get_user_input()
+check_and_clear_replica(replica_dir_path)
