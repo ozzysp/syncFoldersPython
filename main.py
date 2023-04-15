@@ -26,5 +26,18 @@ def check_and_clear_replica(replica_dir_path):
         print(f"{replica_dir_path} does not exist or is not a directory")
 
 
+def synchronize_directories(source_dir_path, replica_dir_path, log_dir_path):
+    check_and_clear_replica(replica_dir_path)
+    shutil.copytree(source_dir_path, replica_dir_path)
+
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    num_files = sum(len(files) for _, _, files in os.walk(source_dir_path))
+    log_file_path = os.path.join(log_dir_path, "log.txt")
+
+    with open(log_file_path, "a") as log_file:
+        log_file.write(f"{timestamp} - Copied {num_files} files from {source_dir_path} to {replica_dir_path}\n")
+
+    print(f"Synchronized {source_dir_path} and {replica_dir_path}. Backup logged to {log_file_path}")
+
 source_dir_path, replica_dir_path, log_dir_path, interval = get_user_input()
-check_and_clear_replica(replica_dir_path)
+synchronize_directories(source_dir_path, replica_dir_path, log_dir_path)
